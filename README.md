@@ -10,8 +10,11 @@ There are however some things that may need explaining.
 Setup
 ----------
 
-As my examples show, there's a standard setup.
+Create a standard Unity 3D project. Then dump the entire of this Assets directory into it, overwriting your own Assets folder.
+
+As my examples show, there's a standard setup for each walker.
 Each leg consists of six critical parts in a heirarchy.
+
 Hip Joint -> Thigh -> Knee Joint -> Shin -> Ankle Joint -> Foot
 
 I provide the Joint Name inputs in the Inspector so that if you choose to name them something differently it will work, 
