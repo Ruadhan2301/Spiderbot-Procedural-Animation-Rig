@@ -26,6 +26,10 @@ For my own purposes, I treat them as a skeleton and simply turn off the Mesh Ren
 
 Essentially, if you make the skeleton the right shape, the code will adapt to support it.
 
+One additional point:
+The ray-casting for the legs needs to ignore the leg parts. So I've added the entire of each mech to Layer 8 and filtered that out.
+If you have any other work with layermasks then you may need to go into the walker code and change the layermask ID appropriately.
+
 -------------
 The Inspector
 -------------
