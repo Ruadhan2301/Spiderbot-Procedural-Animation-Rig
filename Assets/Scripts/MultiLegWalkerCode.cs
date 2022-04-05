@@ -24,6 +24,7 @@ public class MultiLegWalkerCode : MonoBehaviour
     public float stance = 1.65f;
     public float gaitSpread = 0.5f;
     public float gaitLength = 2f;
+    public bool isBiped = false;
 
 
     [Header("Motion Control")]
@@ -188,6 +189,16 @@ public class MultiLegWalkerCode : MonoBehaviour
         return newLeg;
     }
 
+    private float RotateHip(float HipYaw, float HypeAngleYaw)
+    {
+        var Out = HipYaw;
+        var Out2 = HypeAngleYaw;
+        var Out1b = 0f;
+        var Out2b = 0f;
+        if ((Out - Out2) > 180) { Out1b = -(360 - (Out)); } else { Out1b = Out; }
+        if ((Out2 - Out) > 180) { Out2b = -(360 - (Out2)); } else { Out2b = Out2; }
+        return Out2b - Out1b;
+    }
 
 
     private RaycastHit GetFootPositionHit(Vector3 origin, Vector3 localUp)
@@ -237,6 +248,10 @@ public class MultiLegWalkerCode : MonoBehaviour
         var KAng = Mathf.Acos((Mathf.Pow(ThighLength, 2) + Mathf.Pow(ShinLength, 2) - Mathf.Pow(hypeLength, 2)) / (2 * ThighLength * ShinLength)) * radianMultiplier * -1f;
 
         HipRoot.LookAt(FootPos);
+        if (isBiped)
+        {
+            HipRoot.Rotate(new Vector3(0f, 0f, RotateHip(transform.eulerAngles.y, HipRoot.eulerAngles.y) * 1f), Space.Self);
+        }
 
         if (!float.IsNaN(HAng) && !float.IsNaN(KAng))
         {
